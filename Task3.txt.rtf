@@ -1,0 +1,76 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2511
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fnil\fcharset0 Menlo-Regular;\f2\fnil\fcharset134 PingFangSC-Regular;
+}
+{\colortbl;\red255\green255\blue255;\red255\green255\blue255;\red183\green111\blue179;\red202\green202\blue202;
+\red212\green213\blue154;\red71\green137\blue205;\red67\green179\blue255;\red141\green212\blue254;\red0\green0\blue0;
+\red255\green255\blue255;\red203\green203\blue202;\red0\green0\blue0;\red255\green255\blue255;\red203\green203\blue202;
+\red167\green197\blue151;}
+{\*\expandedcolortbl;;\cssrgb\c100000\c100000\c100000;\cssrgb\c77331\c52624\c75301;\cssrgb\c83229\c83229\c83125;
+\cssrgb\c86261\c86245\c66529;\cssrgb\c33936\c61427\c84130;\cssrgb\c31226\c75987\c100000;\cssrgb\c61361\c86489\c99746;\cssrgb\c0\c1\c1;
+\cssrgb\c100000\c100000\c99985;\cssrgb\c83320\c83320\c83112;\cssrgb\c0\c1\c1;\cssrgb\c100000\c100000\c99985;\cssrgb\c83320\c83320\c83112;
+\cssrgb\c71008\c80807\c65805;}
+\margl1440\margr1440\vieww13600\viewh9320\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 \cb2 1. Really unsure but I\'92m taking a shot. Web3 instance is created by \'93
+\f1 \cf3 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec3 await\cf4 \strokec4  \cf5 \strokec5 getWeb3\cf4 \strokec4 ()
+\f0 \cf0 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 \'93 
+\f2 . 
+\f0 Then, the user\'92s accounts and contract instance are extracted. Since web3.eth is used in setting the constant of user accounts, networkId, etc., web3 allows connection to the Ethereum network. Web3 will communicate to nodes on the Ethereum network by RPC.\
+\
+2. 
+\f1 \cf5 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec5 fetchLoot\cf4 \strokec4  = \cf6 \strokec6 async\cf4 \strokec4  () \cf6 \strokec6 =>\cf4 \strokec4  \{\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf4 \strokec4     \cf6 \strokec6 const\cf4 \strokec4  \{ \cf7 \strokec7 contract\cf4 \strokec4 , \cf7 \strokec7 accounts\cf4 \strokec4 , \cf7 \strokec7 tags\cf4 \strokec4 , \cf7 \strokec7 merchTypes\cf4 \strokec4  \} = \cf6 \strokec6 this\cf4 \strokec4 .\cf8 \strokec8 state\cf4 \strokec4 ; 
+\f2 \cf9 \cb10 \strokec11 //contract features, accounts, tags, and merchTypes are used to set the state
+\f1 \cf9 \cb10 \strokec11 \
+\cf4 \cb2 \strokec4     \cf6 \strokec6 this\cf4 \strokec4 .\cf5 \strokec5 setState\cf4 \strokec4 (\{ \cf8 \strokec8 initializing:\cf4 \strokec4  \cf6 \strokec6 true\cf4 \strokec4  \}); 
+\f2 \cf12 \cb13 \outl0\strokewidth0 //state is initialized
+\f1 \cf4 \cb2 \outl0\strokewidth0 \strokec4 \
+\
+    \cf6 \strokec6 const\cf4 \strokec4  \cf7 \strokec7 numTokens\cf4 \strokec4  = \cf3 \strokec3 await\cf4 \strokec4  \cf7 \strokec7 contract\cf4 \strokec4 .\cf8 \strokec8 methods\cf4 \strokec4 .\cf5 \strokec5 totalSupply\cf4 \strokec4 ().\cf5 \strokec5 call\cf4 \strokec4 (); 
+\f2 \cf12 \cb13 \outl0\strokewidth0 //use totalSupply to get the number of tokens
+\f1 \cf4 \cb2 \outl0\strokewidth0 \strokec4 \
+    \cf6 \strokec6 const\cf4 \strokec4  \cf7 \strokec7 available\cf4 \strokec4  = []; 
+\f2 \cf12 \cb13 \outl0\strokewidth0 //initialize variable \'a1\'b0available\'a1\'b1
+\f1 \cf4 \cb2 \outl0\strokewidth0 \strokec4 \
+    \cf6 \strokec6 const\cf4 \strokec4  \cf7 \strokec7 owned\cf4 \strokec4  = []; 
+\f2 \cf12 \cb13 \outl0\strokewidth0 //initialize variable \'a1\'b0owned\'a1\'b1
+\f1 \cf4 \cb2 \outl0\strokewidth0 \strokec4 \
+    \cf3 \strokec3 for\cf4 \strokec4  (\cf6 \strokec6 let\cf4 \strokec4  \cf8 \strokec8 i\cf4 \strokec4  = \cf15 \strokec15 0\cf4 \strokec4 ; \cf8 \strokec8 i\cf4 \strokec4  < \cf7 \strokec7 numTokens\cf4 \strokec4 ; \cf8 \strokec8 i\cf4 \strokec4 ++) \{ 
+\f2 \cf12 \cb13 \outl0\strokewidth0 //loop the following for x times; x is the number of tokens
+\f1 \cf4 \cb2 \outl0\strokewidth0 \strokec4 \
+      \cf6 \strokec6 const\cf4 \strokec4  \cf7 \strokec7 tokenId\cf4 \strokec4  = \cf3 \strokec3 await\cf4 \strokec4  \cf7 \strokec7 contract\cf4 \strokec4 .\cf8 \strokec8 methods\cf4 \strokec4 .\cf5 \strokec5 tokenByIndex\cf4 \strokec4 (\cf8 \strokec8 i\cf4 \strokec4 ).\cf5 \strokec5 call\cf4 \strokec4 (); 
+\f2 \cf12 \cb13 \outl0\strokewidth0 //get tokenId from the contract
+\f1 \cf4 \cb2 \outl0\strokewidth0 \strokec4 \
+      \cf6 \strokec6 const\cf4 \strokec4  \cf7 \strokec7 token\cf4 \strokec4  = \cf3 \strokec3 await\cf4 \strokec4  \cf7 \strokec7 contract\cf4 \strokec4 .\cf8 \strokec8 methods\cf4 \strokec4 .\cf5 \strokec5 getToken\cf4 \strokec4 (\cf7 \strokec7 tokenId\cf4 \strokec4 ).\cf5 \strokec5 call\cf4 \strokec4 (); 
+\f2 \cf12 \cb13 \outl0\strokewidth0 //get token information from the contract
+\f1 \cf4 \cb2 \outl0\strokewidth0 \strokec4 \
+      \cf6 \strokec6 const\cf4 \strokec4  \cf7 \strokec7 owner\cf4 \strokec4  = \cf3 \strokec3 await\cf4 \strokec4  \cf7 \strokec7 contract\cf4 \strokec4 .\cf8 \strokec8 methods\cf4 \strokec4 .\cf5 \strokec5 ownerOf\cf4 \strokec4 (\cf7 \strokec7 tokenId\cf4 \strokec4 ).\cf5 \strokec5 call\cf4 \strokec4 (); 
+\f2 \cf12 \cb13 \outl0\strokewidth0 //get token owner from the contract
+\f1 \cf4 \cb2 \outl0\strokewidth0 \strokec4 \
+      \cf6 \strokec6 const\cf4 \strokec4  \cf7 \strokec7 deciphered\cf4 \strokec4  = \{ 
+\f2 \cf12 \cb13 \outl0\strokewidth0 //create a constant \'a1\'b0deciphered\'a1\'b1 and set its features with the information we extracted from the contract: tokenId, token name, token picture, boolean information on whether the token is for sale, token price, token tags, and merch type of the token
+\f1 \cf4 \cb2 \outl0\strokewidth0 \strokec4 \
+        \cf8 \strokec8 id:\cf4 \strokec4  \cf7 \strokec7 tokenId\cf4 \strokec4 ,\
+        \cf8 \strokec8 name:\cf4 \strokec4  \cf7 \strokec7 token\cf4 \strokec4 .\cf8 \strokec8 _name\cf4 \strokec4 ,\
+        \cf8 \strokec8 picture:\cf4 \strokec4  \cf7 \strokec7 token\cf4 \strokec4 .\cf8 \strokec8 _picture\cf4 \strokec4 ,\
+        \cf8 \strokec8 forSale:\cf4 \strokec4  \cf7 \strokec7 token\cf4 \strokec4 .\cf8 \strokec8 _forSale\cf4 \strokec4 ,\
+        \cf8 \strokec8 price:\cf4 \strokec4  \cf7 \strokec7 token\cf4 \strokec4 .\cf8 \strokec8 _ints\cf4 \strokec4 [\cf15 \strokec15 0\cf4 \strokec4 ],\
+        \cf8 \strokec8 tag:\cf4 \strokec4  \cf7 \strokec7 tags\cf4 \strokec4 [\cf7 \strokec7 token\cf4 \strokec4 .\cf8 \strokec8 _ints\cf4 \strokec4 [\cf15 \strokec15 1\cf4 \strokec4 ]],\
+        \cf8 \strokec8 type:\cf4 \strokec4  \cf7 \strokec7 merchTypes\cf4 \strokec4 [\cf7 \strokec7 token\cf4 \strokec4 .\cf8 \strokec8 _ints\cf4 \strokec4 [\cf15 \strokec15 2\cf4 \strokec4 ]],\
+      \}\
+      \cf3 \strokec3 if\cf4 \strokec4  (\cf7 \strokec7 owner\cf4 \strokec4  == \cf7 \strokec7 accounts\cf4 \strokec4 [\cf15 \strokec15 0\cf4 \strokec4 ]) \cf7 \strokec7 owned\cf4 \strokec4 .\cf5 \strokec5 push\cf4 \strokec4 (\cf7 \strokec7 deciphered\cf4 \strokec4 ); 
+\f2 \cf12 \cb13 \outl0\strokewidth0 //if this token is owned by the user, add the featured \'a1\'b0owned\'a1\'b1 to the deciphered version that the user sees on the website
+\f1 \cf4 \cb2 \outl0\strokewidth0 \strokec4 \
+      \cf3 \strokec3 if\cf4 \strokec4  (\cf7 \strokec7 deciphered\cf4 \strokec4 .\cf8 \strokec8 forSale\cf4 \strokec4 ) \cf7 \strokec7 available\cf4 \strokec4 .\cf5 \strokec5 push\cf4 \strokec4 (\cf7 \strokec7 deciphered\cf4 \strokec4 ); 
+\f2 \cf12 \cb13 \outl0\strokewidth0 //if the token has feature \'a1\'b0forSale\'a1\'b1, show that it is available
+\f1 \cf4 \cb2 \outl0\strokewidth0 \strokec4 \
+    \}\
+    \cf6 \strokec6 this\cf4 \strokec4 .\cf5 \strokec5 setState\cf4 \strokec4 (\{ \cf8 \strokec8 initializing:\cf4 \strokec4  \cf6 \strokec6 false\cf4 \strokec4 , \cf8 \strokec8 available\cf4 \strokec4 , \cf8 \strokec8 owned\cf4 \strokec4  \}); 
+\f2 \cf12 \cb13 \outl0\strokewidth0 //finish updating the state by showing whether the token is available and whether it is owned
+\f1 \cf4 \cb2 \outl0\strokewidth0 \strokec4 \
+  \}\
+}
